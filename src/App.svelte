@@ -1,50 +1,66 @@
 <script>
-    let hours = 0;
-let minutes = 0;
-let seconds = 0;
-let milliseconds = 0;
+    class StopWatch {
+            this.hours = 0;
+            this.minutes = 0;
+            this.seconds = 0;
+            this.milliseconds = 0;
+            this.interval;
 
-let interval = setInterval(start, 10);
+        counter() {
+            this.milliseconds += 1;
 
-function start() {
-    milliseconds += 1;
-    if (milliseconds > 99) {
-        milliseconds = 0;
-        seconds +=1;
-        if (seconds > 59) {
-            seconds = 0;
-            minutes +=1;
-            if (minutes > 59) {
-                minutes = 0;
-                hours +=1;
+            if (this.milliseconds > 99) {
+                this.milliseconds = 0;
+                this.seconds +=1;
+
+                if (this.seconds > 59) {
+                    this.seconds = 0;
+                    this.minutes +=1;
+
+                    if (this.minutes > 59) {
+                        this.minutes = 0;
+                        this.hours +=1;
+                    }
+                }
             }
         }
+
+        start() {
+            if (!this.interval) {
+                this.interval = setInterval(()this.counter, 10);
+                console.log(this.interval);
+                console.log(this.counter);
+            }
+        }
+
+        stop() {
+            if (this.interval) {
+                clearInterval(this.interval);
+                this.interval = null;
+            }
+        }
+
+        reset() {
+            this.hours = 0;
+            this.minutes = 0;
+            this.seconds = 0;
+            this.milliseconds = 0;
+        }
     }
-}
 
+    let stopwatch = new StopWatch();
 
-function stop() {
-    clearInterval(interval);
-}
-
-function reset() {
-    hours = 0;
-    minutes = 0;
-    seconds = 0;
-    milliseconds = 0;
-
-}
 </script>
 
 <main>
-    <div><span>{ hours }</span>h</div>
-    <div><span>{ minutes }</span>m</div>
-    <div><span>{ seconds }</span>s</div>
-    <div><span>{ milliseconds }</span></div>
+    <div><span>{ stopwatch.hours }</span>h</div>
+    <div><span>{ stopwatch.minutes }</span>m</div>
+    <div><span>{ stopwatch.seconds }</span>s</div>
+    <div><span>{ stopwatch.milliseconds }</span></div>
 
-    <button on:click={ start }>START</button>
-    <button on:click={ stop }>STOP</button>
-    <button on:click={ reset }>RESET</button>
+    <button on:click={ stopwatch.start }>START</button>
+    <button on:click={ stopwatch.stop }>STOP</button>
+    <button on:click={ stopwatch.reset }>RESET</button>
 </main>
 
 <style></style>
