@@ -62,12 +62,32 @@
 <main>
     <div>{ format(hours) }h : { format(minutes) }m : { format(seconds) }s : { format(milliseconds) }</div>
 
-    {#if isStarted}
-        <button on:click={ stop }>STOP</button>
-    {:else}
-        <button on:click={ start }>START</button>
-    {/if}
-    <button on:click={ reset }>RESET</button>
+    <div>
+        {#if isStarted}
+            <button on:click={ stop }>STOP</button>
+        {:else}
+            <button on:click={ start }>START</button>
+        {/if}
+        <button on:click={ reset }>RESET</button>
+    </div>
 </main>
 
-<style></style>
+<style>
+    main {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        flex-direction: column;
+    }
+
+    div {
+        color : darkorange;
+        font-size: xx-large;
+    }
+
+    button {
+        border: solid 1px grey;
+        padding: 10px 20px;
+    }
+</style>
